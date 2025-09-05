@@ -1,6 +1,6 @@
 // Welcome message
-console.log('Hello there!');
-console.log('Welcome to the rock paper scissors game');
+let welcomeMsg = 'Hello there!\nWelcome to the rock paper scissors game.';
+alert(welcomeMsg);
 
 // Global scores
 let humanScore = 0;
@@ -10,7 +10,6 @@ let numberOfRounds = 2;
 // Get choices
 function getComputerChoice() {
   let randomNumber = Math.floor(3 * Math.random());
-
   if (randomNumber == 0) {
     return 'rock';
   } else if (randomNumber == 1) {
@@ -21,13 +20,12 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  let humanInput = prompt("Choose between 'rock', 'paper' or 'scissor'");
+  let humanInput = prompt("Choose between 'rock', 'paper' or 'scissors'");
   return humanInput.toLowerCase();
 }
 
 function getWinnerChoice(humanChoice, computerChoice) {
   let totalLength = humanChoice.length + computerChoice.length;
-
   switch (totalLength) {
     case 9:
       return 'paper';
@@ -48,74 +46,78 @@ function capitalizeFirstLetter(word) {
 }
 
 function printChoices(humanChoice, computerChoice) {
-  console.log(`Human choice: ${humanChoice}`);
-  console.log(`Computer choice: ${computerChoice}`);
+  let humanChoiceText = `Human choice: ${humanChoice}`;
+  let computerChoiceText = `Computer choice: ${computerChoice}`;
+  return `${humanChoiceText}\n${computerChoiceText}`;
 }
 
 function printScoreBoard() {
-  console.log(`Scoreboard`);
-  console.log(`Human score: ${humanScore}`);
-  console.log(`Computer score: ${computerScore}`);
+  let humanScoreText = `Human score: ${humanScore}`;
+  let computerScoreText = `Computer score: ${computerScore}`;
+  return `Scoreboard:\n${humanScoreText}\n${computerScoreText}`;
 }
 
 function printWinner() {
+  let winnerMsg = '';
+  
   if (humanScore > computerScore) {
-    console.log(
-      'Congratulations! You beat the computer to the rock paper scissors game'
-    );
+    winnerMsg = 'Congratulations! You beat the computer in rock paper scissors!';
   } else if (humanScore < computerScore) {
-    console.log('Unfortunetly you lost the game.');
+    winnerMsg = 'Unfortunately you lost the game.';
   } else {
-    console.log('Close one! The game ended in a draw!');
+    winnerMsg = 'Close one! The game ended in a draw!';
   }
+  
+  let finalScores = printScoreBoard();
+  let finalMsg = `Game Over!\n\n${finalScores}\n\n${winnerMsg}`;
+  alert(finalMsg);
 }
-function playRound(humanChoice, computerChoice) {
-  // Print the choices
-  printChoices(humanChoice, computerChoice);
 
+function playRound(humanChoice, computerChoice) {
+  let roundMsg = `Round ${n}\n\n`;
+  let choicesMsg = printChoices(humanChoice, computerChoice);
+  let resultMsg = '';
+  
   // If human and computer same choice then draw
   if (humanChoice === computerChoice) {
-    console.log('Draw no points given');
+    resultMsg = 'Draw - no points given';
   } else {
     let winnerChoice = getWinnerChoice(humanChoice, computerChoice);
-
     let humanChoiceText = capitalizeFirstLetter(humanChoice);
     let computerChoiceText = capitalizeFirstLetter(computerChoice);
-
+    
     if (humanChoice === winnerChoice) {
-      console.log(`You win! ${humanChoiceText} beat ${computerChoiceText}`);
+      resultMsg = `You win! ${humanChoiceText} beats ${computerChoiceText}`;
       humanScore++;
     } else if (computerChoice == winnerChoice) {
-      console.log(`You lose! ${computerChoiceText} beat ${humanChoiceText}`);
+      resultMsg = `You lose! ${computerChoiceText} beats ${humanChoiceText}`;
       computerScore++;
     } else {
-      console.log('Could not decide winner');
+      resultMsg = 'Could not decide winner';
     }
   }
-
-  // Display the scoreboard
-  printScoreBoard();
+  
+  let scoreMsg = printScoreBoard();
+  let fullRoundMsg = `${roundMsg}${choicesMsg}\n\n${resultMsg}\n\n${scoreMsg}`;
+  
+  alert(fullRoundMsg);
 }
 
 let n = 1;
-
 while (n <= numberOfRounds) {
-  // Verbose
-  console.log(`Start of round: ${n}`);
 
   // Get human and computer choices
   let humanChoice = getHumanChoice();
   let computerChoice = getComputerChoice();
-
+  
   // Play one round
   playRound(humanChoice, computerChoice);
-  console.log(`End of round: ${n}`);
-
+  
   // Print the winner after the last round
   if (n === numberOfRounds) {
     printWinner();
   }
-
+  
   // Increment round
   n++;
 }
