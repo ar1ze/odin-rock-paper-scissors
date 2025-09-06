@@ -1,3 +1,9 @@
+// Colors
+const GREEN = '#43c25a';
+const RED = '#f85454';
+const YELLOW = '#f9b50f';
+const BLACK = '#000000'
+
 // Game states
 let playerScore = 0;
 let computerScore = 0;
@@ -50,15 +56,15 @@ function updateChoices(playerChoice, computerChoice) {
   computerChoiceDisplay.textContent = insertEmoji(computerChoice);
 }
 
-// Reset choice display to default 
+// Reset choice display to default
 function defaultChoicesDisplay() {
   playerChoiceDisplay.textContent = 'Make your choice!';
   computerChoiceDisplay.textContent = 'Waiting ...';
 }
 
-// Determine winner: 
+// Determine winner:
 // true = player wins, f
-// alse = computer wins, 
+// alse = computer wins,
 // undefined = draw
 function getWinner(playerChoice, computerChoice) {
   let totalLength = playerChoice.length + computerChoice.length;
@@ -82,15 +88,15 @@ function displayWinner(winner) {
   switch (winner) {
     case true:
       message = 'You win!';
-      bgColor = '#43c25a';
+      bgColor = GREEN;
       break;
     case false:
       message = 'Computer wins!';
-      bgColor = '#f85454';
+      bgColor = RED;
       break;
     case undefined:
       message = `It's a tie!`;
-      bgColor = '#f9b50f';
+      bgColor = YELLOW;
   }
 
   updateWinner(message, bgColor);
@@ -122,7 +128,7 @@ function removeWinnerParagraph() {
 }
 
 // Update global scores based on winner
-function updateScores(winner){
+function updateScores(winner) {
   if (winner) {
     playerScore++;
   } else if (winner === false) {
@@ -131,10 +137,25 @@ function updateScores(winner){
   updateDisplayScores();
 }
 
+// Set color for player and computer score displays
+function setDisplayScoresColor(colorPlayer, colorComputer) {
+  playerScoreDisplay.style.color = colorPlayer;
+  computerScoreDisplay.style.color = colorComputer;
+}
+
 // Update score display in DOM
 function updateDisplayScores() {
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
+
+  if (playerScore === computerScore) {
+    setDisplayScoresColor(YELLOW, YELLOW)
+  } else {
+    const playerScoreHigher = playerScore > computerScore;
+    const playerColor = playerScoreHigher ? GREEN : RED; 
+    const computerColor = playerScoreHigher ? RED : GREEN; 
+    setDisplayScoresColor(playerColor, computerColor);
+  }
 }
 
 // Reset all game state
@@ -144,6 +165,7 @@ function resetScores() {
   defaultChoicesDisplay();
   removeWinnerParagraph();
   updateDisplayScores();
+  setDisplayScoresColor(BLACK, BLACK);
 }
 
 // Play one round of the game
@@ -173,3 +195,5 @@ scissorsBtn.addEventListener('click', () => {
 resetScoreBtn.addEventListener('click', () => {
   resetScores();
 });
+
+console.log(`6 > 6: ${6 > 6}`);
