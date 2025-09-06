@@ -195,5 +195,3 @@ scissorsBtn.addEventListener('click', () => {
 resetScoreBtn.addEventListener('click', () => {
   resetScores();
 });
-
-console.log(`6 > 6: ${6 > 6}`);
