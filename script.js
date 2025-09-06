@@ -1,25 +1,23 @@
-// Global scores
+// Game states
 let playerScore = 0;
 let computerScore = 0;
 let numberOfRounds = 1;
 
-// Choice buttons
+// DOM elements
 const rockBtn = document.querySelector('#rock-btn');
 const paperBtn = document.querySelector('#paper-btn');
 const scissorsBtn = document.querySelector('#scissors-btn');
+const resetScoreBtn = document.querySelector('#reset-btn');
 
-// Player choice display
 let playerChoiceDisplay = document.querySelector('#player-choice');
 let computerChoiceDisplay = document.querySelector('#computer-choice');
 
-// Winner display container
 let winnerDisplay = document.querySelector('.winner');
 
-// Player score display
 let playerScoreDisplay = document.querySelector('#player-score');
 let computerScoreDisplay = document.querySelector('#computer-score');
 
-// Get choices
+// Generate random computer choice
 function getComputerChoice() {
   let randomNumber = Math.floor(3 * Math.random());
   switch (randomNumber) {
@@ -32,7 +30,7 @@ function getComputerChoice() {
   }
 }
 
-// Insert emoji to display
+// Add emoji to choice for display
 function insertEmoji(choice) {
   switch (choice) {
     case 'rock':
@@ -45,15 +43,22 @@ function insertEmoji(choice) {
       return choice;
   }
 }
-// Update choice display
+
+// Update choice display for both players
 function updateChoices(playerChoice, computerChoice) {
   playerChoiceDisplay.textContent = insertEmoji(playerChoice);
   computerChoiceDisplay.textContent = insertEmoji(computerChoice);
 }
 
-// Determines round winner: 
-// true = player wins, 
-// false = computer wins, 
+// Reset choice display to default 
+function defaultChoicesDisplay() {
+  playerChoiceDisplay.textContent = 'Make your choice!';
+  computerChoiceDisplay.textContent = 'Waiting ...';
+}
+
+// Determine winner: 
+// true = player wins, f
+// alse = computer wins, 
 // undefined = draw
 function getWinner(playerChoice, computerChoice) {
   let totalLength = playerChoice.length + computerChoice.length;
@@ -69,7 +74,7 @@ function getWinner(playerChoice, computerChoice) {
   }
 }
 
-// Display and update the winner
+// Display winner with colored message
 function displayWinner(winner) {
   let message;
   let bgColor;
@@ -91,50 +96,68 @@ function displayWinner(winner) {
   updateWinner(message, bgColor);
 }
 
+// UPdate or create winner display element
 function updateWinner(message, bgColor) {
   let existingParagraph = winnerDisplay.querySelector('p');
 
-  // Update text and color if exists
   if (existingParagraph) {
-    existingParagraph.textContent = message;
-    existingParagraph.style.cssText = `background: ${bgColor};`;
+    setWinnerParagraphStyle(existingParagraph, message, bgColor);
   } else {
-    // Create a new paragraph
     let newParagraph = document.createElement('p');
-    newParagraph.textContent = message;
-    newParagraph.style.cssText = `background: ${bgColor};`;
+    setWinnerParagraphStyle(newParagraph, message, bgColor);
     winnerDisplay.appendChild(newParagraph);
   }
 }
 
-// Update and display scores
+// Style winner pearagrapth with message and background
+function setWinnerParagraphStyle(paragraph, message, bgColor) {
+  paragraph.textContent = message;
+  paragraph.style.cssText = `background: ${bgColor};`;
+}
+
+// Remove winner display paragraph
+function removeWinnerParagraph() {
+  let existingParagraph = winnerDisplay.querySelector('p');
+  winnerDisplay.removeChild(existingParagraph);
+}
+
+// Update global scores based on winner
 function updateScores(winner){
-  // Update global scores
   if (winner) {
     playerScore++;
   } else if (winner === false) {
     computerScore++;
   }
-  // Change score text
+  updateDisplayScores();
+}
+
+// Update score display in DOM
+function updateDisplayScores() {
   playerScoreDisplay.textContent = playerScore;
   computerScoreDisplay.textContent = computerScore;
 }
 
-// Main function to play a round
+// Reset all game state
+function resetScores() {
+  playerScore = 0;
+  computerScore = 0;
+  defaultChoicesDisplay();
+  removeWinnerParagraph();
+  updateDisplayScores();
+}
+
+// Play one round of the game
 function playRound(humanChoice) {
-  // Get computer choice
   let computerChoice = getComputerChoice();
   updateChoices(humanChoice, computerChoice);
 
-  // Decide winner
   let winner = getWinner(humanChoice, computerChoice);
 
-  // Display winner and update the scores
   displayWinner(winner);
   updateScores(winner);
 }
 
-// Control buttons events listeners
+// Event listeners
 rockBtn.addEventListener('click', () => {
   playRound('rock');
 });
@@ -145,4 +168,8 @@ paperBtn.addEventListener('click', () => {
 
 scissorsBtn.addEventListener('click', () => {
   playRound('scissors');
+});
+
+resetScoreBtn.addEventListener('click', () => {
+  resetScores();
 });
