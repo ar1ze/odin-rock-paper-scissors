@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap');
+
+/* Body */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: space-around;
+  font-size: 16px;
+}
+
+/* Main container */
+.container {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 12%;
+  padding: 1.4rem;
+}
+
+.title {
+  border: 1px solid #000;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 1px;
+  color: gray;
+  flex: 1;
+}
+
+/* Controls container */
+.controls {
+  border: 1px solid #000;
+  margin: 1rem 0;
+  flex: 1;
+}
+
+.controls > p:first-child {
+  border: 1px solid #000;
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.choice-buttons {
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.6rem;
+}
+
+.choice-button {
+  padding: 0.2rem 1.6rem;
+  border-radius: 5px;
+}
+
+.choice-button p {
+  font-weight: bold;
+}
+
+/* Choice display */
+.results {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-family: 'Orbitron', monospace;
+  text-align: center;
+}
+
+.choices {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.winner {
+  border: 1px solid #000;
+  background: #f85454;
+  text-transform: uppercase;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Score Board */
+.score-board {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1rem;
+}
+
+.score-board > p:first-child {
+  border: 1px solid #000;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.score-board > .card {
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  gap: 0.5rem;
+}
+
+.player-score-display,
+.computer-score-display {
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+}   
+
+.reset {
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-around;
+}
+
+#reset-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
