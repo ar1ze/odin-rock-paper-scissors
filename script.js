@@ -1,5 +1,5 @@
 // Global scores
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
 let numberOfRounds = 1;
 
@@ -16,8 +16,8 @@ let computerChoiceDisplay = document.querySelector('#computer-choice');
 let winnerDisplay = document.querySelector('.winner');
 
 // Player score display
-let playerScoreDisplay = document.querySelector('.player-score');
-let computerScoreDisplay = document.querySelector('.computer-score');
+let playerScoreDisplay = document.querySelector('#player-score');
+let computerScoreDisplay = document.querySelector('#computer-score');
 
 // Get choices
 function getComputerChoice() {
@@ -32,6 +32,7 @@ function getComputerChoice() {
   }
 }
 
+// Insert emoji to display
 function insertEmoji(choice) {
   switch (choice) {
     case 'rock':
@@ -39,32 +40,36 @@ function insertEmoji(choice) {
     case 'paper':
       return 'paper 📄';
     case 'scissors':
-      return '✂️';
+      return 'scissors ✂️';
     default:
       return choice;
   }
 }
 // Update choice display
-function updateChoices(humanChoice, computerChoice) {
-  playerChoiceDisplay.textContent = insertEmoji(humanChoice);
+function updateChoices(playerChoice, computerChoice) {
+  playerChoiceDisplay.textContent = insertEmoji(playerChoice);
   computerChoiceDisplay.textContent = insertEmoji(computerChoice);
 }
 
-// Determines round winner: true = player wins, false = computer wins, undefined = draw
-function getWinner(humanChoice, computerChoice) {
-  let totalLength = humanChoice.length + computerChoice.length;
+// Determines round winner: 
+// true = player wins, 
+// false = computer wins, 
+// undefined = draw
+function getWinner(playerChoice, computerChoice) {
+  let totalLength = playerChoice.length + computerChoice.length;
   switch (totalLength) {
     case 9:
-      return humanChoice === 'paper';
+      return playerChoice === 'paper';
     case 12:
-      return humanChoice === 'rock';
+      return playerChoice === 'rock';
     case 13:
-      return humanChoice === 'scissors';
+      return playerChoice === 'scissors';
     default:
       return undefined;
   }
 }
 
+// Display and update the winner
 function displayWinner(winner) {
   let message;
   let bgColor;
@@ -75,7 +80,7 @@ function displayWinner(winner) {
       bgColor = '#43c25a';
       break;
     case false:
-      message = 'Compueter wins!';
+      message = 'Computer wins!';
       bgColor = '#f85454';
       break;
     case undefined:
@@ -89,8 +94,8 @@ function displayWinner(winner) {
 function updateWinner(message, bgColor) {
   let existingParagraph = winnerDisplay.querySelector('p');
 
+  // Update text and color if exists
   if (existingParagraph) {
-    // Update text and color
     existingParagraph.textContent = message;
     existingParagraph.style.cssText = `background: ${bgColor};`;
   } else {
@@ -102,22 +107,34 @@ function updateWinner(message, bgColor) {
   }
 }
 
-// Main play round
+// Update and display scores
+function updateScores(winner){
+  // Update global scores
+  if (winner) {
+    playerScore++;
+  } else if (winner === false) {
+    computerScore++;
+  }
+  // Change score text
+  playerScoreDisplay.textContent = playerScore;
+  computerScoreDisplay.textContent = computerScore;
+}
+
+// Main function to play a round
 function playRound(humanChoice) {
+  // Get computer choice
   let computerChoice = getComputerChoice();
-  console.log('');
-  console.log(`Human choice: ${humanChoice}`);
-  console.log(`Computer choice: ${computerChoice}`);
   updateChoices(humanChoice, computerChoice);
 
-  console.log('');
+  // Decide winner
   let winner = getWinner(humanChoice, computerChoice);
-  console.log(`Human won?: ${winner}`);
 
-  console.log('');
+  // Display winner and update the scores
   displayWinner(winner);
+  updateScores(winner);
 }
-// Events
+
+// Control buttons events listeners
 rockBtn.addEventListener('click', () => {
   playRound('rock');
 });
