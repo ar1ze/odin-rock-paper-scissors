@@ -1,9 +1,21 @@
 # Rock Paper Scissors
-A simple, console-based game of Rock Paper Scissors built with JavaScript. This project was completed as part of [The Odin Project's Foundations course](https://www.theodinproject.com/lessons/foundations-rock-paper-scissors).
+
+A classic Rock Paper Scissors game built with vanilla JavaScript, featuring an interactive web interface where players compete against computer with score tracking and round-by-round gameplay. This project is part of [The Odin Project's Foundations course](https://www.theodinproject.com/lessons/foundations-rock-paper-scissors).
+
+## Screenshot
 
 <div align="center">
   <img src="images/demo.png" alt="Game Demo">
 </div>
 
-### Live Demo
-You can play the game live [here](https://ar1ze.github.io/odin-rock-paper-scissors/).
+## Live Demo
+
+🎮 [Play the Game](https://ar1ze.github.io/odin-rock-paper-scissors/)
+
+## Technologies & Concepts
+
+• **JavaScript**  
+• **HTML/CSS**  
+• **Conditional Logic**  
+• **Event Listeners**  
+• **Functions**  
