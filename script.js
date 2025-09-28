@@ -1,8 +1,8 @@
 // Colors
 const GREEN = '#43c25a';
-const RED = '#f85454';
+const RED = '#e74c3c';
 const YELLOW = '#f9b50f';
-const BLACK = '#000000'
+const WHITE = '#ffffff';
 
 // Game states
 let playerScore = 0;
@@ -165,7 +165,7 @@ function resetScores() {
   defaultChoicesDisplay();
   removeWinnerParagraph();
   updateDisplayScores();
-  setDisplayScoresColor(BLACK, BLACK);
+  setDisplayScoresColor(WHITE, WHITE);
 }
 
 // Play one round of the game
