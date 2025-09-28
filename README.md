@@ -7,7 +7,7 @@ A classic Rock Paper Scissors game built with vanilla JavaScript, featuring an i
 </div>
 
 ## Live Demo
-🎮 [Play the Game](https://ar1ze.github.io/odin-rock-paper-scissors/)
+🎮 [Play the Game](https://ar1ze.github.io/rock-paper-scissors/)
 
 ## Technologies & Concepts
 • JavaScript  
